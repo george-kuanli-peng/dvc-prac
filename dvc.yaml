@@ -1,6 +1,6 @@
 stages:
   data_load:
-    cmd: python src/stages/data_load.py --config /mlsteam/lab/mlsteam2.yml
+    cmd: python src/stages/data_load.py --config mlsteam.yml
     deps:
     - src/stages/data_load.py
     params:
@@ -9,7 +9,7 @@ stages:
     outs:
     - data/raw/iris.csv
   featurize:
-    cmd: python src/stages/featurize.py --config /mlsteam/lab/mlsteam2.yml
+    cmd: python src/stages/featurize.py --config mlsteam.yml
     deps:
     - data/raw/iris.csv
     - src/stages/featurize.py
@@ -19,7 +19,7 @@ stages:
     outs:
     - data/processed/featured_iris.csv
   data_split:
-    cmd: python src/stages/data_split.py --config /mlsteam/lab/mlsteam2.yml
+    cmd: python src/stages/data_split.py --config mlsteam.yml
     deps:
     - data/processed/featured_iris.csv
     - src/stages/data_split.py
@@ -30,7 +30,7 @@ stages:
     - data/processed/test_iris.csv
     - data/processed/train_iris.csv
   train:
-    cmd: python src/stages/train.py --config /mlsteam/lab/mlsteam2.yml
+    cmd: python src/stages/train.py --config mlsteam.yml
     deps:
     - data/processed/train_iris.csv
     - src/stages/train.py
@@ -41,7 +41,7 @@ stages:
     outs:
     - models/model.joblib
   evaluate:
-    cmd: python src/stages/evaluate.py --config /mlsteam/lab/mlsteam2.yml
+    cmd: python src/stages/evaluate.py --config mlsteam.yml
     deps:
     - data/processed/test_iris.csv
     - models/model.joblib
